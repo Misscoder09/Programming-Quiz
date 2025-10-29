@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Quiz — HTML / CSS / JS / Python</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module">
+  // Import the functions you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+
+  // Your Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBGtN0pMMzSarwePqqd2ssh9IJL6kaEby4",
+    authDomain: "programing-quiz-d41fd.firebaseapp.com",
+    projectId: "programing-quiz-d41fd",
+    storageBucket: "programing-quiz-d41fd.appspot.com",
+    messagingSenderId: "498897609363",
+    appId: "1:498897609363:web:345428c6c3afbf42dea366",
+    measurementId: "G-Z7RB5XXM46"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase(app);
+
+  // Save score function
+  function saveScore(username, score) {
+    set(ref(db, "leaderboard/" + username), {
+      score: score,
+      date: new Date().toISOString()
+    })
+    .then(() => {
+      console.log("✅ Score saved to Firebase!");
+    })
+    .catch((error) => {
+      console.error("❌ Error saving score:", error);
+    });
+  }
+
+  // Make the function accessible to other scripts
+
+  window.saveScore = saveScore;
+</script>
+
+</head>
+<body>
+    <div class="container">
+  <div class="app">
+    <div class="header">
+      <div class="logo">QZ</div>
+      <div>
+        <div class="title">Programming Quiz</div>
+        <div class="subtitle">Test your knowledge of HTML, CSS, JS & Python!</div>
+      </div>
+    </div>
+
+   <div id="nameScreen" class="card" style="text-align:center;">
+      <h2>Enter Your Name</h2>
+      <p class="small">Please enter your name to start the quiz.</p>
+      <input id="studentName" type="text" placeholder="Your name" style="padding:10px;width:80%;border-radius:8px;border:1px solid #ccc;margin-top:10px;">
+      <br><br>
+      <button class="btn primary" onclick="submitName()">Continue</button>
+    </div>
+
+    <div id="menu" class="card" style="display:none;">
+      <h2 style="text-align:center;">Welcome, <span id="displayName"></span>!</h2>
+      <p class="small" style="text-align:center;">Choose a topic below to begin your quiz.</p>
+      <div class="grid">
+        <div class="quiz-card"><h3>HTML Quiz</h3><p>Structure, elements, semantics & forms.</p><button class="btn primary" onclick="startQuiz('HTML')">Start</button></div>
+        <div class="quiz-card"><h3>CSS Quiz</h3><p>Selectors, layout, box model & properties.</p><button class="btn primary" onclick="startQuiz('CSS')">Start</button></div>
+        <div class="quiz-card"><h3>JavaScript Quiz</h3><p>Functions, arrays & DOM.</p><button class="btn primary" onclick="startQuiz('JavaScript')">Start</button></div>
+        <div class="quiz-card"><h3>Python Quiz</h3><p>Syntax, data types & loops.</p><button class="btn primary" onclick="startQuiz('Python')">Start</button></div>
+      </div>
+      <div style="text-align:center;margin-top:20px;">
+        <button class="btn ghost" onclick="showLeaderboard()">View Leaderboard 🏆</button>
+      </div>
+    </div>
+
+     <div id="quizCard" class="card" style="display:none;"></div>
+
+    <div id="leaderboard" class="card" style="display:none;">
+      <div class="leaderboard">
+        <h2>🏆 Leaderboard</h2>
+        <table id="leaderboardTable"></table>
+        <div style="margin-top:10px;">
+          <button class="btn ghost" onclick="backToMenuFromLeaderboard()">Back to Menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
