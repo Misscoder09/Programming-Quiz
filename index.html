@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Quiz — HTML / CSS / JS / Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+  <div class="app">
+    <div class="header">
+      <div class="logo">QZ</div>
+      <div>
+        <div class="title">Programming Quiz</div>
+        <div class="subtitle">Test your knowledge of HTML, CSS, JS & Python!</div>
+      </div>
+    </div>
+
+   <div id="nameScreen" class="card" style="text-align:center;">
+      <h2>Enter Your Name</h2>
+      <p class="small">Please enter your name to start the quiz.</p>
+      <input id="studentName" type="text" placeholder="Your name" style="padding:10px;width:80%;border-radius:8px;border:1px solid #ccc;margin-top:10px;">
+      <br><br>
+      <button class="btn primary" onclick="submitName()">Continue</button>
+    </div>
+
+    <div id="menu" class="card" style="display:none;">
+      <h2 style="text-align:center;">Welcome, <span id="displayName"></span>!</h2>
+      <p class="small" style="text-align:center;">Choose a topic below to begin your quiz.</p>
+      <div class="grid">
+        <div class="quiz-card"><h3>HTML Quiz</h3><p>Structure, elements, semantics & forms.</p><button class="btn primary" onclick="startQuiz('HTML')">Start</button></div>
+        <div class="quiz-card"><h3>CSS Quiz</h3><p>Selectors, layout, box model & properties.</p><button class="btn primary" onclick="startQuiz('CSS')">Start</button></div>
+        <div class="quiz-card"><h3>JavaScript Quiz</h3><p>Functions, arrays & DOM.</p><button class="btn primary" onclick="startQuiz('JavaScript')">Start</button></div>
+        <div class="quiz-card"><h3>Python Quiz</h3><p>Syntax, data types & loops.</p><button class="btn primary" onclick="startQuiz('Python')">Start</button></div>
+      </div>
+      <div style="text-align:center;margin-top:20px;">
+        <button class="btn ghost" onclick="showLeaderboard()">View Leaderboard 🏆</button>
+      </div>
+    </div>
+
+     <div id="quizCard" class="card" style="display:none;"></div>
+
+    <div id="leaderboard" class="card" style="display:none;">
+      <div class="leaderboard">
+        <h2>🏆 Leaderboard</h2>
+        <table id="leaderboardTable"></table>
+        <div style="margin-top:10px;">
+          <button class="btn ghost" onclick="backToMenuFromLeaderboard()">Back to Menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
