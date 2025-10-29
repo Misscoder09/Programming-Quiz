@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programming Quiz — HTML / CSS / JS / Python</title>
     <link rel="stylesheet" href="style.css">
+     <script type="module">
+  // Import the functions you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+
+  // Your Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBGtN0pMMzSarwePqqd2ssh9IJL6kaEby4",
+    authDomain: "programing-quiz-d41fd.firebaseapp.com",
+    projectId: "programing-quiz-d41fd",
+    storageBucket: "programing-quiz-d41fd.appspot.com",
+    messagingSenderId: "498897609363",
+    appId: "1:498897609363:web:345428c6c3afbf42dea366",
+    measurementId: "G-Z7RB5XXM46"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase(app);
+
+  // Save score function
+  function saveScore(username, score) {
+    set(ref(db, "leaderboard/" + username), {
+      score: score,
+      date: new Date().toISOString()
+    })
+    .then(() => {
+      console.log("✅ Score saved to Firebase!");
+    })
+    .catch((error) => {
+      console.error("❌ Error saving score:", error);
+    });
+  }
+
+  // Make the function accessible to other scripts
+
+  window.saveScore = saveScore;
+</script>
+
 </head>
 <body>
     <div class="container">
@@ -58,4 +99,5 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script src="script.js"></script>
 </body>
+
 </html>
